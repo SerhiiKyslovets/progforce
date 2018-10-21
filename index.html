@@ -40,6 +40,11 @@
       background-color: #ccc;
     }
 
+    .btn:disabled:hover {
+      cursor: default;
+      background-color: #fff;
+    }
+
     #wrapper {
       max-width: 500px;
       width: 100%;
@@ -55,6 +60,10 @@
       box-sizing: border-box;
     }
 
+    #winners-block {
+      padding-right: 60px;
+    }
+
     #new-winner-btn {
       position: absolute;
       top: 10px;
@@ -62,13 +71,19 @@
     }
 
     #form-wrap {
+      position: relative;
       width: 100%;
-      padding-bottom: 50px;
-      margin-bottom: 20px;
+      margin-bottom: 70px;
     }
 
     #save-btn {
-      float: right;
+      position: absolute;
+      right: 0;
+      bottom: -50px;
+    }
+
+    #save-btn:disabled {
+      border-color: #ccc;
     }
 
     form {
@@ -94,11 +109,25 @@
 
     .input-row>input {
       width: 250px;
+      border-color: #fff;
+    }
+
+    .input-row>input.valid {
+      border-color: #fff; 
+    }
+
+    .input-row>input.invalid {
+      border-color: red
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
+    }
+
+    .editable:hover {
+      background-color: #ccc;
+      cursor: pointer;
     }
 
     th, td {
@@ -114,31 +143,46 @@
   <div id="wrapper">
     <div id="winners" class="border padding-10">
       <h1>Winners: </h1>
+      <p id="winners-block"></p>
       <button id="new-winner-btn" class="btn border">New winner</button>
     </div>
 
     <div id="form-wrap">
-      <form action="" class="border padding-10">
+      <form action="" method="POST" class="border padding-10">
         <h1>Registration form</h1>
         <div class="input-row">
           <label for="name">Name:</label>
-          <input id="name" type="text" name="name">
+
+          <input id="name" type="text" name="name" 
+            placeholder="Name" tabindex='1' required="required"
+          >
         </div>
         <div class="input-row">
           <label for="surname">Surname:</label>
-          <input type="text" name="surname">
+
+          <input id="surname" type="text" name="surname" 
+            placeholder="Surname" tabindex='2' required="required"
+          >
         </div>
         <div class="input-row">
           <label for="email">Email:</label>
-          <input type="email" name="email">
+
+          <input id="email" type="email" name="email" 
+            placeholder="Email" tabindex='3' required="required"
+          >
         </div>
         <div class="input-row">
           <label for="phone">Phone:</label>
-          <input type="tel" name="phone">
-        </div>
-      </form>
 
-      <button id="save-btn" class="btn border">Save</button>
+          <input id="phone" class="valid" type="tel" 
+            name="phone" placeholder="Phone" tabindex='4'
+          >
+        </div>
+
+        <button id="save-btn" class="btn border" name="submit" type="submit" disabled>
+          Save
+        </button>
+      </form>
     </div>
 
     <table id="people" class="border">
